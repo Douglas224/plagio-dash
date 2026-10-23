@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://cuc76vcliys3c"]
+
+[ext_resource type="Script" uid="uid://dokrpxk4mrxco" path="res://mundo.gd" id="1"]
+[ext_resource type="PackedScene" path="res://jugador.tscn" id="2"]
+
+[node name="Mundo" type="Node2D" unique_id=916284376]
+script = ExtResource("1")
+
+[node name="Mapa" type="Node2D" parent="." unique_id=303521335]
+
+[node name="Cubo" parent="." unique_id=216747161 instance=ExtResource("2")]
+position = Vector2(160, 540)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1294266769]
+
+[node name="Puntaje" type="Label" parent="HUD" unique_id=709003005]
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 900.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0.207843, 0.94902, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "PROGRESO  0%"
+
+[node name="Mensaje" type="Label" parent="HUD" unique_id=1340485007]
+offset_left = 16.0
+offset_top = 52.0
+offset_right = 900.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "PULSO NEÓN · INTERMEDIO"
+
+[node name="Menu" type="Button" parent="HUD" unique_id=1621774414]
+visible = false
+offset_left = 16.0
+offset_top = 112.0
+offset_right = 196.0
+offset_bottom = 158.0
+theme_override_font_sizes/font_size = 18
+text = "MENÚ PRINCIPAL"
+
+[node name="Reintentar" type="Button" parent="HUD" unique_id=459187707]
+visible = false
+offset_left = 208.0
+offset_top = 112.0
+offset_right = 374.0
+offset_bottom = 158.0
+theme_override_font_sizes/font_size = 18
+text = "REINTENTAR"
+
+[node name="Pausa" type="Button" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -152.0
+offset_top = 16.0
+offset_right = -20.0
+offset_bottom = 62.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 18
+text = "Ⅱ  PAUSA"
+
+[node name="PausaPanel" type="PanelContainer" parent="HUD"]
+visible = false
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -115.0
+offset_right = 175.0
+offset_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Contenido" type="VBoxContainer" parent="HUD/PausaPanel"]
+theme_override_constants/separation = 16
+
+[node name="Titulo" type="Label" parent="HUD/PausaPanel/Contenido"]
+theme_override_font_sizes/font_size = 30
+text = "JUEGO EN PAUSA"
+horizontal_alignment = 1
+
+[node name="Continuar" type="Button" parent="HUD/PausaPanel/Contenido"]
+custom_minimum_size = Vector2(250, 48)
+theme_override_font_sizes/font_size = 20
+text = "CONTINUAR"
+
+[node name="Salir" type="Button" parent="HUD/PausaPanel/Contenido"]
+custom_minimum_size = Vector2(250, 48)
+theme_override_font_sizes/font_size = 20
+text = "SALIR AL MENÚ"

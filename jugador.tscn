@@ -1,0 +1,129 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://jugador.gd" id="s"]
+[ext_resource type="Texture2D" path="res://assets/cubo_hoja.png" id="t0"]
+[ext_resource type="AudioStream" path="res://assets/musica.wav" id="a0"]
+[ext_resource type="AudioStream" path="res://assets/explosion.wav" id="a1"]
+[ext_resource type="Shader" path="res://cubo_color.gdshader" id="s1"]
+
+[sub_resource type="ShaderMaterial" id="ColorCube"]
+shader = ExtResource("s1")
+
+[sub_resource type="AtlasTexture" id="A0_0"]
+atlas = ExtResource("t0")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A0_1"]
+atlas = ExtResource("t0")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A0_2"]
+atlas = ExtResource("t0")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A0_3"]
+atlas = ExtResource("t0")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A0_4"]
+atlas = ExtResource("t0")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A0_5"]
+atlas = ExtResource("t0")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A0_6"]
+atlas = ExtResource("t0")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A0_7"]
+atlas = ExtResource("t0")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A0_8"]
+atlas = ExtResource("t0")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_A0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("A0_0")
+}],
+"loop": false,
+"name": &"normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("A0_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("A0_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("A0_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("A0_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("A0_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("A0_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("A0_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("A0_8")
+}],
+"loop": false,
+"name": &"explotar",
+"speed": 16.0
+}]
+
+[sub_resource type="RectangleShape2D" id="Forma"]
+size = Vector2(56, 56)
+
+[sub_resource type="CircleShape2D" id="SensorForma"]
+radius = 70.0
+
+[sub_resource type="RectangleShape2D" id="HurtboxForma"]
+size = Vector2(48, 48)
+
+
+[node name="Cubo" type="CharacterBody2D"]
+floor_snap_length = 18.0
+floor_constant_speed = true
+script = ExtResource("s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ColorCube")
+sprite_frames = SubResource("SpriteFrames_A0")
+animation = &"normal"
+
+[node name="Musica" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("a0")
+
+[node name="Explosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("a1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Forma")
+
+[node name="Sensor" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor"]
+shape = SubResource("SensorForma")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("HurtboxForma")
+
+[node name="Camera2D" type="Camera2D" parent="."]
